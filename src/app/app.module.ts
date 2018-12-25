@@ -31,7 +31,6 @@ import { from } from 'rxjs/observable/from';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyC4tiOoJcZig65WFYE3pXjmCOnjtKTZSdU'})
   ],
   bootstrap: [IonicApp],
   entryComponents: [
