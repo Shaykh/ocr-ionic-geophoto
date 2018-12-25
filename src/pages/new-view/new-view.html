@@ -1,11 +1,8 @@
 <ion-header>
-
   <ion-navbar>
     <ion-title>Ajouter NatureView</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <form [formGroup]="natureViewForm">
@@ -31,8 +28,16 @@
       <ion-item>
         <p>Latitude : {{ latitude.toFixed(5) }} - Longitude {{ longitude.toFixed(5) }}</p>
       </ion-item>
+      <ion-item *ngIf="imageUrl">
+        <img [src]="imageUrl" style="max-width: 100%" >
+      </ion-item>
     </ion-list>
-    <button ion-button full (click)="onSubmitForm()" [disabled]="natureViewForm.invalid">
+    <div text-center>
+      <button ion-button round large icon-only (click)="onTakePhoto()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </div>
+    <button ion-button full (click)="onSubmitForm()" [disabled]="natureViewForm.invalid || !latitude || !imageUrl">
       Enregistrer
     </button>
   </form>

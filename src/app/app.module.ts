@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera } from '@ionic-native/camera';
 
 import { AgmCoreModule } from '@agm/core';
 
@@ -42,6 +43,7 @@ import { from } from 'rxjs/observable/from';
     SplashScreen,
     NatureViewService,
     Geolocation,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
