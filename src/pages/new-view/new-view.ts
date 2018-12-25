@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ModalController, Modal } from 'ionic-angular';
+import { SetCoordinatesPage } from '../set-coordinates/set-coordinates';
 
 @Component({
   selector: 'page-new-view',
@@ -12,13 +14,14 @@ export class NewViewPage implements OnInit {
   longitude: number;
   imageUrl: string;
 
-  constructor(public formBuilder: FormBuilder) {
+  constructor(public formBuilder: FormBuilder,
+    public modalCtrl: ModalController) {
   }
 
   ngOnInit() {
     this.initForm();
   }
-  
+
   initForm() {
     this.natureViewForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -27,7 +30,27 @@ export class NewViewPage implements OnInit {
     });
   }
 
+  onOpenCoordsModal() {
+    let modal: Modal;
+    if (this.latitude) {
+      modal = this.modalCtrl.create(
+        SetCoordinatesPage,
+        {latitude: this.latitude, longitude: this.longitude});
+    } else {
+      modal = this.modalCtrl.create(SetCoordinatesPage);
+    }
+    modal.present();
+    modal.onDidDismiss(
+      (data) => {
+        if (data) {
+          this.latitude = data.latitude;
+          this.longitude = data.longitude;
+        }
+      }
+    );
+  }
+
   onSubmitForm() {
-    
+
   }
 }

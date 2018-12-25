@@ -4,6 +4,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { AgmCoreModule } from '@agm/core';
+
 import { NatureViewService } from './../services/natureView.service';
 
 import { MyApp } from './app.component';
@@ -22,7 +24,8 @@ import { SetCoordinatesPage } from '../pages/set-coordinates/set-coordinates';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyC4tiOoJcZig65WFYE3pXjmCOnjtKTZSdU'})
   ],
   bootstrap: [IonicApp],
   entryComponents: [

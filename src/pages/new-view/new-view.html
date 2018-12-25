@@ -23,11 +23,16 @@
         <ion-textarea formControlName="description"></ion-textarea>
       </ion-item>
     </ion-list>
-    <button
-      ion-button
-      full
-      (click)="onSubmitForm()"
-      [disabled]="natureViewForm.invalid">
+    <button ion-button full icon-left (click)="onOpenCoordsModal()">
+      <ion-icon name="flag"></ion-icon>
+      Ajouter un lieu
+    </button>
+    <ion-list *ngIf="latitude">
+      <ion-item>
+        <p>Latitude : {{ latitude.toFixed(5) }} - Longitude {{ longitude.toFixed(5) }}</p>
+      </ion-item>
+    </ion-list>
+    <button ion-button full (click)="onSubmitForm()" [disabled]="natureViewForm.invalid">
       Enregistrer
     </button>
   </form>
