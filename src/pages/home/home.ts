@@ -1,3 +1,4 @@
+import { SingleViewPage } from './../single-view/single-view';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Subscription } from 'rxjs/Subscription';
@@ -15,7 +16,7 @@ export class HomePage implements OnInit, OnDestroy {
   natureViewSubscription: Subscription;
   newViewPage: NewViewPage;
 
-  constructor(public navCtrl: NavController,
+  constructor(private navCtrl: NavController,
     private natureViewService: NatureViewService) {
   }
 
@@ -29,7 +30,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   onLoadNatureView(view: NatureView) {
-
+    this.navCtrl.push(SingleViewPage, { natureView: view});
   }
 
   ngOnDestroy() {

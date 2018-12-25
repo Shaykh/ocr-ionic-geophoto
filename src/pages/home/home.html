@@ -2,7 +2,7 @@
   <ion-navbar>
     <ion-buttons end>
       <button ion-button icon-only [navPush]="newViewPage">
-        <ion-icon name="add"></ion-icon>  
+        <ion-icon name="add"></ion-icon>
       </button>
     </ion-buttons>
     <ion-title>
@@ -13,7 +13,9 @@
 
 <ion-content padding>
   <ion-card *ngFor="let view of natureViewList" (click)="onLoadNatureView(view)">
-    <img src="view.imagePath">
-    <ion-card-title>{{ view.name }}</ion-card-title>
+    <img [src]="view.imagePath">
+    <ion-card-content>
+      <h1>{{ view.name }}</h1>
+    </ion-card-content>
   </ion-card>
 </ion-content>
