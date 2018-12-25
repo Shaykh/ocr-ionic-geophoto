@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { AgmCoreModule } from '@agm/core';
 
@@ -28,6 +30,7 @@ import { from } from 'rxjs/observable/from';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     AgmCoreModule.forRoot({apiKey: 'AIzaSyC4tiOoJcZig65WFYE3pXjmCOnjtKTZSdU'})
   ],
   bootstrap: [IonicApp],
@@ -44,6 +47,7 @@ import { from } from 'rxjs/observable/from';
     NatureViewService,
     Geolocation,
     Camera,
+    File,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

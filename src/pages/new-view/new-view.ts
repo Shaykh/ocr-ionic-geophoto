@@ -3,8 +3,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController, Modal, ToastController, normalizeURL, NavController } from 'ionic-angular';
 import { SetCoordinatesPage } from '../set-coordinates/set-coordinates';
 import { Camera } from '@ionic-native/camera';
+import { File, Entry } from '@ionic-native/file';
 import { NatureViewService } from './../../services/natureView.service';
 import { NatureView } from './../../models/NatureView.model';
+
+declare var cordova: any;
 
 @Component({
   selector: 'page-new-view',
@@ -17,9 +20,10 @@ export class NewViewPage implements OnInit {
   longitude: number;
   imageUrl: string;
 
-  constructor(public formBuilder: FormBuilder,
-    public modalCtrl: ModalController,
+  constructor(private formBuilder: FormBuilder,
+    private modalCtrl: ModalController,
     private camera: Camera,
+    private file: File,
     private natureViewService: NatureViewService,
     private navCtrl: NavController,
     private toastCtrl: ToastController) {
@@ -42,7 +46,7 @@ export class NewViewPage implements OnInit {
     if (this.latitude) {
       modal = this.modalCtrl.create(
         SetCoordinatesPage,
-        {latitude: this.latitude, longitude: this.longitude});
+        { latitude: this.latitude, longitude: this.longitude });
     } else {
       modal = this.modalCtrl.create(SetCoordinatesPage);
     }
@@ -66,7 +70,17 @@ export class NewViewPage implements OnInit {
     }).then(
       (data) => {
         if (data) {
-          this.imageUrl = normalizeURL(data);
+          /* const path = data.replace(/[^\/]*$/, ''); const filename = data.replace(/^.*[\\\/]/, '');*/
+          const path = data.replace(/[^\/]*$/, '');
+          const filename = data.replace(/^.*[\\\/]/, '');
+          const targetDirectory = cordova.file.dataDirectory;
+          this.file.moveFile(path, filename, targetDirectory, filename + new Date().getTime())
+            .then(
+              (data: Entry) => {
+                this.imageUrl = normalizeURL(data.nativeURL);
+                this.camera.cleanup();
+              }
+            );
         }
       }
     ).catch(
@@ -76,6 +90,7 @@ export class NewViewPage implements OnInit {
           duration: 3000,
           position: 'bottom'
         }).present();
+        this.camera.cleanup();
       }
     );
   }
