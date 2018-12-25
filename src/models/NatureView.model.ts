@@ -4,5 +4,6 @@ export class NatureView {
         public description: string,
         public latitude: number,
         public longitude: number,
-        public imagePath: string){}
+        public imagePath: string){
+        }
 }
