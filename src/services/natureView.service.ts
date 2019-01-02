@@ -1,7 +1,9 @@
 import { Subject } from 'rxjs';
 import { Storage } from '@ionic/storage';
 import { NatureView } from './../models/NatureView.model';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class NatureViewService {
     private natureViewList: NatureView[] = [];
     natureViewList$ = new Subject<NatureView[]>(); 

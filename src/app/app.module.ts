@@ -17,7 +17,6 @@ import { HomePage } from '../pages/home/home';
 import { NewViewPage } from '../pages/new-view/new-view';
 import { SingleViewPage } from '../pages/single-view/single-view';
 import { SetCoordinatesPage } from '../pages/set-coordinates/set-coordinates';
-import { from } from 'rxjs/observable/from';
 
 @NgModule({
   declarations: [
